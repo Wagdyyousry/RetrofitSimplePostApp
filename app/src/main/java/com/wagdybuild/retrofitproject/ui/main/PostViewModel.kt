@@ -1,4 +1,37 @@
-package com.wagdybuild.retrofitproject.ui.main;
+package com.wagdybuild.retrofitproject.ui.main
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.wagdybuild.retrofitproject.data.PostClients
+import com.wagdybuild.retrofitproject.models.Comment2
+import com.wagdybuild.retrofitproject.models.Post2
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class PostViewModel : ViewModel() {
+    private var postLiveData = MutableLiveData<List<Post2>>()
+    private var commentLiveData = MutableLiveData<List<Comment2>>()
+    private val postClients:PostClients = PostClients()
+    fun getPostsLiveData(): MutableLiveData<List<Post2>> = postLiveData
+    fun getCommentsLiveData() : MutableLiveData<List<Comment2>> = commentLiveData
+    fun getPosts(){
+         viewModelScope.launch{
+             postLiveData.value =postClients.getPosts()
+         }
+    }
+    fun getComments(postId: String) {
+        viewModelScope.launch{
+            commentLiveData.value = postClients.getComments(postId)
+        }
+
+    }
+
+
+}
+/*package com.wagdybuild.retrofitproject.ui.main;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -54,3 +87,4 @@ public class PostViewModel extends ViewModel {
         });
     }
 }
+*/

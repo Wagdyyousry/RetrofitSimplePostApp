@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wagdybuild.retrofitproject.adapters.CommentAdapter
 import com.wagdybuild.retrofitproject.databinding.ActivityCommentsBinding
+import com.wagdybuild.retrofitproject.models.Comment2
 import com.wagdybuild.retrofitproject.ui.main.PostViewModel
 
 class CommentsActivity : AppCompatActivity() {
@@ -24,9 +25,9 @@ class CommentsActivity : AppCompatActivity() {
         binding.rvMain.layoutManager = LinearLayoutManager(this)
         binding.rvMain.adapter = adapter
 
-        postViewModel.getComments(postId)
-        postViewModel.getCommentLiveData().observe(this) {
-            adapter.setItemList(it)
+        postViewModel.getComments(postId!!)
+        postViewModel.getCommentsLiveData().observe(this) {
+            adapter.setItemList(it as ArrayList<Comment2>)
         }
 
     }

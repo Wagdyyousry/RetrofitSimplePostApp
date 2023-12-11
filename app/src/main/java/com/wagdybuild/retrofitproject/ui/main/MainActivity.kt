@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wagdybuild.retrofitproject.adapters.PostAdapter
 import com.wagdybuild.retrofitproject.databinding.ActivityMainBinding
+import com.wagdybuild.retrofitproject.models.Post2
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding.rvMain.adapter = adapter
 
         postViewModel.getPosts()
-        postViewModel.getPostLiveData().observe(this) {
-            adapter.setItemList(it)
+        postViewModel.getPostsLiveData().observe(this) {
+            adapter.setItemList(it as ArrayList<Post2>)
         }
 
     }

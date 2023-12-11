@@ -1,19 +1,14 @@
-package com.wagdybuild.retrofitproject.data;
+package com.wagdybuild.retrofitproject.data
 
-import com.wagdybuild.retrofitproject.models.Comment;
-import com.wagdybuild.retrofitproject.models.Comment2;
-import com.wagdybuild.retrofitproject.models.Post;
-import com.wagdybuild.retrofitproject.models.Post2;
+import com.wagdybuild.retrofitproject.models.Comment2
+import com.wagdybuild.retrofitproject.models.Post2
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-import java.util.ArrayList;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
-public interface PostInterface {
+interface PostInterface {
     @GET("posts")
-    public Call<ArrayList<Post2>> getPosts();
-
+    suspend fun getPosts(): List<Post2>
     @GET("comments")
-    public Call<ArrayList<Comment2>> getComments(@Query("postId") String postId);
+    suspend fun getComments(@Query("postId") postId: String):List<Comment2>
 }
